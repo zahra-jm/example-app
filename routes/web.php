@@ -30,4 +30,7 @@ Route::get('/articles',function(){
 Route::get('/articles/{id}',function($id){
     return $id;
 
+
+
+    
 });
