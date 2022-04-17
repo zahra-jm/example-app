@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Article;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,20 +18,12 @@ use Illuminate\Support\Facades\Route;
     return view('welcome');
 });*/
 
-Route::get('/',function(){
-    return '';
+Route::get('/',[Article::class,'index']);
 
-});
+Route::get('/articles',[Article::class,'articles']);
 
-Route::get('/articles',function(){
-    return 'articles';
+Route::get('/articles/{id}',[Article::class,'articles_name']);
 
-});
+Route::get('/articles/create',[Article::class,'create']);
 
-Route::get('/articles/{id}',function($id){
-    return $id;
-
-
-
-    
-});
+Route::get('/articles/edit/{id}',[Article::class,'articles_edit']);
