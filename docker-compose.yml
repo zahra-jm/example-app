@@ -38,7 +38,8 @@ services:
             MYSQL_PASSWORD: '${DB_PASSWORD}'
             MYSQL_ALLOW_EMPTY_PASSWORD: 1
         volumes:
-            - 'sail-mysql:/var/lib/mysql'
+            # 'sail-mysql:/var/lib/mysql'
+            - ./z-sql:/var/lib/mysql:rw,delegated
         networks:
             - sail
         healthcheck:
@@ -82,6 +83,18 @@ services:
             - '/dev/shm:/dev/shm'
         networks:
             - sail
+    phpmyadmin:
+        image: phpmyadmin/phpmyadmin
+        links:
+          - mysql:mysql
+        ports:
+          - 8080:80
+        environment:
+          MYSQL_USERNAME: "${DB_USERNAME}"
+          MYSQL_ROOT_PASSWORD: "${DB_PASSWORD}"
+          PMA_HOST: mysql
+        networks:
+          - sail
 networks:
     sail:
         driver: bridge
